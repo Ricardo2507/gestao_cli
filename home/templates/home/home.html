@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Seja bem-vindo!{% endblock title %}
+
+{% block main %}
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center text-center">
+        <div class="col-md-8">
+            <h1 class="mb-4">Seja bem-vindo!</h1>
+
+            {% if user.is_authenticated %}
+                <p class="lead mb-3">Olá, <strong>{{ user.username }}</strong>!</p>
+                <form action="{% url 'home:logout' %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Sair</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Entrar</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+{% block footer %}
+<footer class="footer bg-light text-center py-3 mt-5 border-top">
+    <div class="container">
+        <span class="text-muted">Desenvolvimento Web com Django</span>
+    </div>
+</footer>
+{% endblock footer %}
